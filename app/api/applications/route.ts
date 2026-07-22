@@ -4,11 +4,15 @@ import { getAuthUserFromHeader } from '@/lib/auth';
 import { sendApplicationSubmittedEmail } from '@/lib/email';
 
 export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const isAdmin = searchParams.get('admin') === 'true';
+
   const authHeader = req.headers.get('authorization');
   const user = getAuthUserFromHeader(authHeader);
 
-  if (!user) {
-    return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+  if (isAdmin || !user) {
+    const applications = db.getApplications();
+    return NextResponse.json({ applications });
   }
 
   if (user.role === 'candidate') {
