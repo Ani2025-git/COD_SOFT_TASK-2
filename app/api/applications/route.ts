@@ -10,7 +10,7 @@ export async function GET(req: Request) {
   const authHeader = req.headers.get('authorization');
   const user = getAuthUserFromHeader(authHeader);
 
-  if (isAdmin || !user) {
+  if (!user || isAdmin) {
     const applications = db.getApplications();
     return NextResponse.json({ applications });
   }
