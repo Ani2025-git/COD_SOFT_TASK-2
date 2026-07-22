@@ -52,7 +52,7 @@ export default function LoginPage() {
       }
     } catch (err: any) {
       setErrorMsg(err.message || 'Authentication error');
-    } font-medium {
+    } finally {
       setLoading(false);
     }
   };
