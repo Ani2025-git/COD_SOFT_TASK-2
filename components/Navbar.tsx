@@ -17,6 +17,7 @@ import {
   Building2,
   BookmarkCheck,
   Zap,
+  ShieldAlert,
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -90,9 +91,21 @@ export default function Navbar() {
             </Link>
           )}
 
+          <Link
+            href="/admin/dashboard"
+            className={`flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
+              isActive('/admin/dashboard')
+                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                : 'text-emerald-400 hover:bg-emerald-950/40'
+            }`}
+          >
+            <ShieldAlert className="h-3.5 w-3.5" />
+            Admin CMS
+          </Link>
+
           <button
             onClick={() => setEmailModalOpen(true)}
-            className="flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium text-slate-300 hover:text-emerald-300 hover:bg-slate-800/60 transition-all"
+            className="flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-emerald-300 hover:bg-slate-800/60 transition-all"
             title="Inspect Email Notifications"
           >
             <span className="relative flex h-2 w-2">
@@ -154,6 +167,15 @@ export default function Navbar() {
                     <p className="text-xs font-medium text-slate-400">Signed in as</p>
                     <p className="text-sm font-semibold text-white truncate">{user.email}</p>
                   </div>
+
+                  <Link
+                    href="/admin/dashboard"
+                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-xs font-medium text-emerald-400 hover:bg-slate-800"
+                    onClick={() => setUserDropdownOpen(false)}
+                  >
+                    <ShieldAlert className="h-4 w-4 text-emerald-400" />
+                    Super Admin CMS
+                  </Link>
 
                   {user.role === 'employer' ? (
                     <>
@@ -242,6 +264,15 @@ export default function Navbar() {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-slate-800 bg-slate-950 px-4 pt-2 pb-6 space-y-3">
+          <Link
+            href="/admin/dashboard"
+            className="flex items-center gap-3 rounded-lg px-3 py-2 text-base font-medium text-emerald-400 hover:bg-slate-900"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <ShieldAlert className="h-5 w-5 text-emerald-400" />
+            Super Admin Control Panel
+          </Link>
+
           <Link
             href="/jobs"
             className="flex items-center gap-3 rounded-lg px-3 py-2 text-base font-medium text-slate-200 hover:bg-slate-900"
